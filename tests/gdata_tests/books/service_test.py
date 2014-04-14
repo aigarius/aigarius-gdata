@@ -58,7 +58,7 @@ class BookCRUDTests(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    print "Please use a test account. May cause data loss."
-    username = raw_input("Google Username: ").strip()
+    print("Please use a test account. May cause data loss.")
+    username = input("Google Username: ").strip()
     password = getpass.getpass()
     unittest.main()

@@ -20,7 +20,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 
 import re
 import unittest
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import gdata.auth
 
 
@@ -100,7 +100,7 @@ class GenerateClientLoginRequestBodyTest(unittest.TestCase):
     account_type = 'HOSTED'
     service = 'test'
     source = 'auth test'
-    old_request_body = urllib.urlencode({'Email': email,
+    old_request_body = urllib.parse.urlencode({'Email': email,
                                          'Passwd': password,
                                          'accountType': account_type,
                                          'service': service,

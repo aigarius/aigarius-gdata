@@ -44,12 +44,12 @@ class UrlTest(unittest.TestCase):
     self.assert_(url.protocol is None)
     self.assert_(url.host is None)
     self.assert_(url.path == '/calendar/feeds')
-    self.assert_(len(url.params.keys()) == 1)
+    self.assert_(len(list(url.params.keys())) == 1)
     self.assert_('foo' in url.params)
     self.assert_(url.params['foo'] == 'bar')
     
     url = atom.url.parse_url('/calendar/feeds?my+foo=bar%3Dx')
-    self.assert_(len(url.params.keys()) == 1)
+    self.assert_(len(list(url.params.keys())) == 1)
     self.assert_('my foo' in url.params)
     self.assert_(url.params['my foo'] == 'bar=x')
    

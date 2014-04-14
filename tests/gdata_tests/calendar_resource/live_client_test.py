@@ -85,8 +85,8 @@ class CalendarResourceClientTest(unittest.TestCase):
           'CR-NYC-14-12-BR', 'Boardroom',
           ('This conference room is in New York City, building 14, floor 12, '
            'Boardroom'), 'CR')
-    except Exception, e:
-      print e
+    except Exception as e:
+      print(e)
       self.client.delete_resource('CR-NYC-14-12-BR')
       # If the test failed to run to completion
       # the resource may already exist

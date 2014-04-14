@@ -548,7 +548,7 @@ class MetadataTest(DocsTestCase):
 
 def suite():
   suite = unittest.TestSuite()
-  for key, value in RESOURCES.iteritems():
+  for key, value in RESOURCES.items():
     for case in [ResourcesTest, AclTest, RevisionsTest, ChangesTest]:
       tests = unittest.TestLoader().loadTestsFromTestCase(case)
       for test in tests:

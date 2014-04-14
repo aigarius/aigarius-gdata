@@ -48,7 +48,7 @@ def conceal_secrets(recordings):
       res.body = re.sub(r'SID=[^\n]+', 'SID=hogehoge', res.body)
       res.body = re.sub(r'LSID=[^\n]+', 'LSID=hogehoge', res.body)
       res.body = re.sub(r'Auth=[^\n]+', 'Auth=hogehoge', res.body)
-    if req.headers.has_key('Authorization'):
+    if 'Authorization' in req.headers:
       req.headers['Authorization'] = 'hogehoge'
     ret.append((req, res))
   return ret
@@ -135,6 +135,6 @@ class AppsServiceTestForGetGeneratorForAllUsers(AppsServiceBaseTest,
 
 if __name__ == '__main__':
   print ('The tests may delete or update your data.')
-  apps_username = raw_input('Please enter your username: ')
+  apps_username = input('Please enter your username: ')
   apps_password = getpass.getpass()
   unittest.main()

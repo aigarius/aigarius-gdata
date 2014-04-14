@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
   try:
     opts, args = getopt.getopt(sys.argv[1:], '', ['user=', 'pw=', 'domain='])
-  except getopt.error, msg:
+  except getopt.error as msg:
     print ('Profiles Tests\nNOTE: Please run these tests only with a test '
            'account. The tests may delete or update your data.\n'
            '\nUsage: service_test.py --email=EMAIL '
@@ -115,15 +115,15 @@ if __name__ == '__main__':
       domain = arg
 
   while not email:
-    print 'NOTE: Please run these tests only with a test account.'
-    email = raw_input('Please enter your email: ')
+    print('NOTE: Please run these tests only with a test account.')
+    email = input('Please enter your email: ')
   while not password:
     password = getpass.getpass('Please enter password: ')
     if not password:
-      print 'Password cannot be blank.'
+      print('Password cannot be blank.')
   while not domain:
-    print 'NOTE: Please run these tests only with a test account.'
-    domain = raw_input('Please enter your Apps domain: ')
+    print('NOTE: Please run these tests only with a test account.')
+    domain = input('Please enter your Apps domain: ')
 
   suite = unittest.makeSuite(ProfilesServiceTest)
   unittest.TextTestRunner().run(suite)

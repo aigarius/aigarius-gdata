@@ -209,7 +209,7 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
-    self.assertEqual(copy.next, token.next)
+    self.assertEqual(copy.__next__, token.__next__)
     self.assertEqual(copy.verifier, token.verifier)
 
     token = gdata.gauth.OAuthRsaToken(
@@ -224,8 +224,8 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
-    self.assertEqual(copy.next, token.next)
-    self.assert_(copy.next is None)
+    self.assertEqual(copy.__next__, token.__next__)
+    self.assert_(copy.__next__ is None)
     self.assertEqual(copy.verifier, token.verifier)
     self.assert_(copy.verifier is None)
 
@@ -241,8 +241,8 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
-    self.assertEqual(copy.next, token.next)
-    self.assert_(copy.next is None)
+    self.assertEqual(copy.__next__, token.__next__)
+    self.assert_(copy.__next__ is None)
     self.assertEqual(copy.verifier, token.verifier)
 
   def test_oauth_hmac_conversion(self):
@@ -260,7 +260,7 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
-    self.assertEqual(copy.next, token.next)
+    self.assertEqual(copy.__next__, token.__next__)
     self.assertEqual(copy.verifier, token.verifier)
 
     token = gdata.gauth.OAuthHmacToken(
@@ -276,8 +276,8 @@ class TokensToAndFromBlobsTest(unittest.TestCase):
     self.assertEqual(copy.token, token.token)
     self.assertEqual(copy.token_secret, token.token_secret)
     self.assertEqual(copy.auth_state, token.auth_state)
-    self.assertEqual(copy.next, token.next)
-    self.assert_(copy.next is None)
+    self.assertEqual(copy.__next__, token.__next__)
+    self.assert_(copy.__next__ is None)
     self.assertEqual(copy.verifier, token.verifier)
 
   def test_oauth2_conversion(self):
@@ -600,7 +600,7 @@ class OAuth2TokenFromCredentialsTest(unittest.TestCase):
     proxy_keys = ['client_id', 'client_secret', 'user_agent', 'token_uri',
                   'access_token', 'refresh_token', 'token_expiry', '_invalid']
     for key in proxy_keys:
-      self.assertFalse(self.token.__dict__.has_key(key))
+      self.assertFalse(key in self.token.__dict__)
 
   def test_get_proxied_values_change_credentials(self):
     new_value = 'NEW_VALUE'
@@ -612,8 +612,8 @@ class OAuth2TokenFromCredentialsTest(unittest.TestCase):
 
   def test_get_proxied_values_change_credentials(self):
     # Make sure scope is not a valid attribute (ignored in this subclass)
-    self.assertFalse(self.token.__dict__.has_key('scope'))
-    self.assertFalse(self.token.__class__.__dict__.has_key('scope'))
+    self.assertFalse('scope' in self.token.__dict__)
+    self.assertFalse('scope' in self.token.__class__.__dict__)
     # Make sure attribute lookup fails as it should
     self.assertRaises(AttributeError, getattr, self.token, 'scope')
     self.assertRaises(AttributeError, lambda: self.token.scope)
@@ -638,8 +638,8 @@ class OAuth2TokenFromCredentialsTest(unittest.TestCase):
     self._check_all_values()
 
   def test_set_proxied_values_nonprotected_attribute(self):
-    self.assertFalse(self.token.__dict__.has_key('scope'))
-    self.assertFalse(self.token.__class__.__dict__.has_key('scope'))
+    self.assertFalse('scope' in self.token.__dict__)
+    self.assertFalse('scope' in self.token.__class__.__dict__)
     self.token.scope = 'value'
     self.assertEqual(self.token.scope, 'value')
     self.assertFalse(hasattr(self.credentials, 'scope'))
@@ -768,7 +768,7 @@ class FindScopesForService(unittest.TestCase):
 
   def test_find_all_scopes(self):
     count = 0
-    for key, scopes in gdata.gauth.AUTH_SCOPES.iteritems():
+    for key, scopes in gdata.gauth.AUTH_SCOPES.items():
       count += len(scopes)
     self.assertEqual(count, len(gdata.gauth.find_scopes_for_services()))
 

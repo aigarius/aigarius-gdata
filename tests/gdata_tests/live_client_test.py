@@ -266,10 +266,10 @@ class VersionTwoClientContactsTest(unittest.TestCase):
     self.client.delete(edited)
 
   def notest_crud_over_https_proxy(self):
-    import urllib
+    import urllib.request, urllib.parse, urllib.error
     PROXY_ADDR = '98.192.125.23'
     try:
-      response = urllib.urlopen('http://' + PROXY_ADDR)
+      response = urllib.request.urlopen('http://' + PROXY_ADDR)
     except IOError:
       return
     # Only bother running the test if the proxy is up

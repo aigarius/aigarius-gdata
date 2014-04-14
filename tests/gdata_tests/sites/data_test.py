@@ -179,7 +179,7 @@ class ContentFeedTest(unittest.TestCase):
              'listpage': self.feed.GetListPages,
              'webpage': self.feed.GetWebpages}
 
-    for k, v in kinds.iteritems():
+    for k, v in kinds.items():
       entries = v()
       self.assertEqual(len(entries), 1)
       for entry in entries:

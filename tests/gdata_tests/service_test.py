@@ -383,7 +383,7 @@ CaptchaUrl=Captcha?ctoken=HiteT4b0Bk5Xg18_AcVoP6-yFkHPibe7O9EqxeiI7lUSN
     try:
       self.gd_client.ProgrammaticLogin()
       self.fail('Login attempt should have caused a CAPTCHA challenge.')
-    except gdata.service.CaptchaRequired, error:
+    except gdata.service.CaptchaRequired as error:
       self.assertEquals(self.gd_client.captcha_url, 
           ('https://www.google.com/accounts/Captcha?ctoken=HiteT4b0Bk5Xg18_'
            'AcVoP6-yFkHPibe7O9EqxeiI7lUSN'))
@@ -433,7 +433,7 @@ class QueryTest(unittest.TestCase):
 
   def testContructorShouldRejectBadInputs(self):
     test_q = gdata.service.Query(params=[1,2,3,4])
-    self.assert_(len(test_q.keys()) == 0)
+    self.assert_(len(list(test_q.keys())) == 0)
 
   def testTextQueryProperty(self):
     self.assert_(self.query.text_query is None)
@@ -572,6 +572,6 @@ class TokenLookupTest(unittest.TestCase):
 if __name__ == '__main__':
   print ('GData Service Media Unit Tests\nNOTE: Please run these tests only '
          'with a test  account. The tests may delete or update your data.')
-  username = raw_input('Please enter your username: ')
+  username = input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()

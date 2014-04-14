@@ -19,7 +19,7 @@ __author__ = 'api.jscudder (Jeff Scudder)'
 import getpass
 import re
 import unittest
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import atom
 import gdata.contacts.service
 import gdata.test_config as conf
@@ -168,7 +168,7 @@ class ContactsServiceTest(unittest.TestCase):
     self.assertEquals(batch_result.entry[0].batch_status.code,
                       '201')
     expected_batch_url = re.compile('default').sub(
-        urllib.quote(self.gd_client.email),
+        urllib.parse.quote(self.gd_client.email),
         gdata.contacts.service.DEFAULT_BATCH_URL)
     self.failUnless(batch_result.GetBatchLink().href,
                     expected_batch_url)
