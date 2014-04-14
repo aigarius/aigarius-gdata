@@ -19,7 +19,7 @@ __author__ = 'api.jscudder (Jeffrey Scudder)'
 import getpass
 import time
 import unittest
-import StringIO
+import io
 import gdata.photos.service
 import gdata.photos
 import atom
@@ -77,6 +77,6 @@ class PhotosServiceTest(unittest.TestCase):
 if __name__ == '__main__':
   print ('Google Photos test\nNOTE: Please run these tests only with a test '
          'account. The tests may delete or update your data.')
-  username = raw_input('Please enter your username: ')
+  username = input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()

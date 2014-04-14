@@ -1,6 +1,6 @@
 """Class for caching TLS sessions."""
 
-import thread
+import _thread
 import time
 
 class SessionCache:
@@ -31,7 +31,7 @@ class SessionCache:
         @param maxAge:  The number of seconds before a session expires
         from the cache.  The default is 14400 (i.e. 4 hours)."""
 
-        self.lock = thread.allocate_lock()
+        self.lock = _thread.allocate_lock()
 
         # Maps sessionIDs to sessions
         self.entriesDict = {}
@@ -96,7 +96,8 @@ class SessionCache:
         self.firstIndex = index
 
 def _test():
-    import doctest, SessionCache
+    import doctest
+    from . import SessionCache
     return doctest.testmod(SessionCache)
 
 if __name__ == "__main__":

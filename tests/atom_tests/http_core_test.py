@@ -23,7 +23,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 import unittest
 import atom.http_core
-import StringIO
+import io
 
 
 class UriTest(unittest.TestCase):
@@ -116,7 +116,7 @@ class HttpRequestTest(unittest.TestCase):
         'this is a test')))
     
   def test_add_file_without_size(self):
-    virtual_file = StringIO.StringIO('this is a test')
+    virtual_file = io.StringIO('this is a test')
     request = atom.http_core.HttpRequest()
     try:
       request.add_body_part(virtual_file, 'text/plain')

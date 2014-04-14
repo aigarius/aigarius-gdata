@@ -37,7 +37,7 @@ class FactoryTest(unittest.TestCase):
     try:
       self.client.SetCredentials('foo', 'bar')
       self.fail()
-    except gdata.spreadsheet.text_db.Error, e:
+    except gdata.spreadsheet.text_db.Error as e:
       pass
 
   def testCreateGetAndDeleteDatabase(self):
@@ -141,7 +141,7 @@ class TableTest(unittest.TestCase):
       self.fail()
     except gdata.spreadsheet.service.RequestError:
       pass
-    except Exception, error:
+    except Exception as error:
       #TODO: Why won't the except RequestError catch this?
       pass
 
@@ -202,7 +202,7 @@ class TableTest(unittest.TestCase):
 
 if __name__ == '__main__':
   if not username:
-    username = raw_input('Spreadsheets API | Text DB Tests\n'
+    username = input('Spreadsheets API | Text DB Tests\n'
                          'Please enter your username: ')
   if not password:
     password = getpass.getpass()  

@@ -110,7 +110,7 @@ class EmailSettingsTest(unittest.TestCase):
                                    shortcuts=True,
                                    arrows=True,
                                    snippets=True,
-                                   unicode=True)
+                                   str=True)
     self.assertEquals(result['pageSize'], '100')
 
 
@@ -119,8 +119,8 @@ if __name__ == '__main__':
 
 NOTE: Please run these tests only with a test user account.
 """)
-  domain = raw_input('Google Apps domain: ')
-  admin_email = '%s@%s' % (raw_input('Administrator username: '), domain)
+  domain = input('Google Apps domain: ')
+  admin_email = '%s@%s' % (input('Administrator username: '), domain)
   admin_password = getpass.getpass('Administrator password: ')
-  username = raw_input('Test username: ')
+  username = input('Test username: ')
   unittest.main()

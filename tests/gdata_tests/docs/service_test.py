@@ -20,7 +20,7 @@ __author__ = ('api.jfisher (Jeff Fisher), '
 import getpass
 import os
 import re
-import StringIO
+import io
 import time
 import unittest
 
@@ -341,7 +341,7 @@ class DocumentListUpdateTest(DocumentsListServiceTest):
 
     # Append content to document
     data = 'data to append'
-    ms = gdata.MediaSource(file_handle=StringIO.StringIO(data),
+    ms = gdata.MediaSource(file_handle=io.StringIO(data),
                            content_type='text/plain',
                            content_length=len(data))
     uri = updated_entry.GetEditMediaLink().href + '?append=true'
@@ -397,7 +397,7 @@ class DocumentListExportTest(DocumentsListServiceTest):
     exception_raised = False
     try:
       self.client.Export('non_existent_doc', path)
-    except Exception, e:  # expected
+    except Exception as e:  # expected
       exception_raised = True
       self.assert_(exception_raised)
       self.assert_(not os.path.exists(path))
@@ -405,7 +405,7 @@ class DocumentListExportTest(DocumentsListServiceTest):
 if __name__ == '__main__':
   print ('DocList API Tests\nNOTE: Please run these tests only with a test '
          'account. The tests may delete or update your data.')
-  username = raw_input('Please enter your username: ')
+  username = input('Please enter your username: ')
   password = getpass.getpass()
   if client.GetClientLoginToken() is None:
     client.ClientLogin(username, password,

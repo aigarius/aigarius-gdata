@@ -98,10 +98,10 @@ class BloggerQueryTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
-  print ('NOTE: Please run these tests only with a test account. ' +
-         'The tests may delete or update your data.')
-  username = raw_input('Please enter your username: ')
+  print(('NOTE: Please run these tests only with a test account. ' +
+         'The tests may delete or update your data.'))
+  username = input('Please enter your username: ')
   password = getpass.getpass()
-  test_blog_id = raw_input('Please enter the blog id for the test blog: ')
+  test_blog_id = input('Please enter the blog id for the test blog: ')
   unittest.main()
 

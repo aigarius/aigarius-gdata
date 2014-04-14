@@ -207,8 +207,8 @@ if __name__ == '__main__':
   print ('These tests must be run on a sheet with this data:\n'
          'a1,b1,c1,d1\n'
          '1,2,3,4')
-  username = raw_input('Please enter your username: ')
+  username = input('Please enter your username: ')
   password = getpass.getpass()
-  ss_key = raw_input('Please enter your spreadsheet key: ')
-  ws_key = raw_input('Please enter your worksheet key (usually od6): ')
+  ss_key = input('Please enter your spreadsheet key: ')
+  ws_key = input('Please enter your worksheet key (usually od6): ')
   unittest.main()

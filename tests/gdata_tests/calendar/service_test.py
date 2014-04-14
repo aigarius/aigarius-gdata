@@ -313,7 +313,7 @@ class CalendarServiceUnitTest(unittest.TestCase):
     # the format doesn't seem to be important per the RFC except for being
     # globally unique.
     uid_string = ''
-    for i in xrange(121):
+    for i in range(121):
       uid_string += "%X" % r.randint(0, 0xf)
 
     # Set event data
@@ -337,7 +337,7 @@ class CalendarServiceUnitTest(unittest.TestCase):
       bad_event = self.cal_client.InsertEvent(event,
           '/calendar/feeds/default/private/full')
       self.fail('Was able to insert an event with a duplicate UID')
-    except gdata.service.RequestError, error:
+    except gdata.service.RequestError as error:
       # for the current problem with redirects, just re-raise so the
       # failure doesn't seem to be because of the duplicate UIDs.
       status = error[0]['status']
@@ -456,6 +456,6 @@ class CalendarEventQueryUnitTest(unittest.TestCase):
 if __name__ == '__main__':
   print ('Google Calendar Test\nNOTE: Please run these tests only with a '
          'test account. The tests may delete or update your data.')
-  username = raw_input('Please enter your username: ')
+  username = input('Please enter your username: ')
   password = getpass.getpass()
   unittest.main()

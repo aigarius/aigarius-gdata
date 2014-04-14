@@ -23,7 +23,7 @@ __author__ = 'j.s@google.com (Jeff Scudder)'
 
 
 import unittest
-import StringIO
+import io
 import os.path
 import atom.mock_http_core
 import atom.http_core
@@ -62,7 +62,7 @@ class EchoClientTest(unittest.TestCase):
                                query={'test': 'true', 'happy': 'yes'}), 
         headers={'Authorization':'Test xyzzy', 'Testing':'True'})
     request.add_body_part('start', 'text/plain')
-    request.add_body_part(StringIO.StringIO('<html><body>hi</body></html>'),
+    request.add_body_part(io.StringIO('<html><body>hi</body></html>'),
                           'text/html', len('<html><body>hi</body></html>'))
     request.add_body_part('alert("Greetings!")', 'text/javascript')
     response = client.request(request)
