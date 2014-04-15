@@ -21,6 +21,7 @@
 __author__ = 'Vic Fryzel <vf@google.com>'
 
 
+from __future__ import print_function
 import unittest
 import gdata.client
 import gdata.data

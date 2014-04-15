@@ -27,6 +27,7 @@ Client Login authorization routine.
 __author__ = 'api.nickm@google.com (Nick Mihailovski)'
 
 
+from __future__ import print_function
 import gdata.analytics.client
 import gdata.sample_util
 

@@ -31,6 +31,7 @@ You can get help for command-line arguments as
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 import getopt
 import getpass
 import sys

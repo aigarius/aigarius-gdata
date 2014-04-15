@@ -23,6 +23,7 @@
 __author__ = 'pti@google.com (Prashant Tiwari)'
 
 
+from __future__ import print_function
 import getpass
 from gdata.calendar_resource.client import CalendarResourceClient
 
@@ -45,7 +46,7 @@ class CalendarResourceSample(object):
 
   def create(self, resource_properties):
     """Creates a calendar resource with the given resource_properties
-    
+
     Args:
       resource_properties: A dictionary of calendar resource properties
     """
@@ -59,7 +60,7 @@ class CalendarResourceSample(object):
 
   def get(self, resource_id=None):
     """Retrieves the calendar resource with the given resource_id
-    
+
     Args:
       resource_id: The optional calendar resource identifier
     """
@@ -72,7 +73,7 @@ class CalendarResourceSample(object):
 
   def update(self, resource_properties):
     """Updates the calendar resource with the given resource_properties
-    
+
     Args:
       resource_properties: A dictionary of calendar resource properties
     """
@@ -86,7 +87,7 @@ class CalendarResourceSample(object):
 
   def delete(self, resource_id):
     """Deletes the calendar resource with the given resource_id
-    
+
     Args:
       resource_id: The unique calendar resource identifier
     """

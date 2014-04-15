@@ -18,6 +18,7 @@
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
 
+from __future__ import print_function
 import sys
 import getopt
 import getpass
@@ -31,15 +32,15 @@ class ContactsSample(object):
 
   def __init__(self, email, password):
     """Constructor for the ContactsSample object.
-    
+
     Takes an email and password corresponding to a gmail account to
     demonstrate the functionality of the Contacts feed.
-    
+
     Args:
       email: [string] The e-mail address of the account to use for the sample.
       password: [string] The password corresponding to the account specified by
           the email parameter.
-    
+
     Yields:
       A ContactsSample object used to run the sample demonstrating the
       functionality of the Contacts feed.
@@ -49,17 +50,17 @@ class ContactsSample(object):
 
   def PrintFeed(self, feed, ctr=0):
     """Prints out the contents of a feed to the console.
-   
+
     Args:
       feed: A gdata.contacts.ContactsFeed instance.
       ctr: [int] The number of entries in this feed previously printed. This
           allows continuous entry numbers when paging through a feed.
-    
+
     Returns:
       The number of entries printed, including those previously printed as
       specified in ctr. This is for passing as an argument to ctr on
       successive calls to this method.
-    
+
     """
     if not feed.entry:
       print('\nNo entries in feed.\n')
@@ -85,10 +86,10 @@ class ContactsSample(object):
 
   def PrintPaginatedFeed(self, feed, print_method):
     """ Print all pages of a paginated feed.
-    
+
     This will iterate through a paginated feed, requesting each page and
     printing the entries contained therein.
-    
+
     Args:
       feed: A gdata.contacts.ContactsFeed instance.
       print_method: The method which will be used to print each page of the
@@ -116,10 +117,10 @@ class ContactsSample(object):
 
   def PromptOperationShouldContinue(self):
     """ Display a "Continue" prompt.
-    
+
     This give is used to give users a chance to break out of a loop, just in
     case they have too many contacts/groups.
-    
+
     Returns:
       A boolean value, True if the current operation should continue, False if
       the current operation should terminate.
@@ -196,8 +197,8 @@ class ContactsSample(object):
 
     new_contact = gdata.contacts.data.ContactEntry(name=gdata.data.Name(full_name=gdata.data.FullName(text=name)))
     new_contact.content = atom.data.Content(text=notes)
-    # Create a work email address for the contact and use as primary. 
-    new_contact.email.append(gdata.data.Email(address=primary_email, 
+    # Create a work email address for the contact and use as primary.
+    new_contact.email.append(gdata.data.Email(address=primary_email,
         primary='true', rel=gdata.data.WORK_REL))
     entry = self.gd_client.CreateContact(new_contact)
 
@@ -224,7 +225,7 @@ class ContactsSample(object):
     query.updated_min = updated_min
     feed = self.gd_client.GetGroups(q=query)
     self.PrintGroupsFeed(feed, 0)
-   
+
   def _SelectContact(self):
     feed = self.gd_client.GetContacts()
     self.PrintFeed(feed)
@@ -260,10 +261,10 @@ class ContactsSample(object):
 
   def GetMenuChoice(self, max):
     """Retrieves the menu selection from the user.
-    
+
     Args:
       max: [int] The maximum number of allowed choices (inclusive)
-      
+
     Returns:
       The integer of the menu item chosen by the user.
     """
@@ -275,7 +276,7 @@ class ContactsSample(object):
       except ValueError:
         print('Invalid choice. Please choose a value between 1 and', max)
         continue
-      
+
       if num > max or num < 1:
         print('Invalid choice. Please choose a value between 1 and', max)
       else:

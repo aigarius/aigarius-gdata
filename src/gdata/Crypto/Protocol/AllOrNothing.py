@@ -19,6 +19,7 @@ http://theory.lcs.mit.edu/~rivest/fusion.pdf
 
 __revision__ = "$Id: AllOrNothing.py,v 1.8 2003/02/28 15:23:20 akuchling Exp $"
 
+from __future__ import print_function
 import operator
 import string
 from Crypto.Util.number import bytes_to_long, long_to_bytes

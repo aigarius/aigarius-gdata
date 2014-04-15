@@ -2,6 +2,7 @@
 
 This module has basic math/crypto code."""
 
+from __future__ import print_function
 import os
 import sys
 import math

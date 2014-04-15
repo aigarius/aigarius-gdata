@@ -17,6 +17,7 @@
 
 __author__ = 'e.bidelman (Eric Bidelman)'
 
+from __future__ import print_function
 import gdata.contacts
 import gdata.contacts.service
 import gdata.docs
@@ -40,7 +41,7 @@ print("\nList of contacts for %s:" % (requestor_id,))
 feed = contacts.GetContactsFeed()
 for entry in feed.entry:
   print(entry.title.text)
-  
+
 # GET - fetch another user's contact list
 requestor_id = 'another_user@yourdomain.com'
 print("\nList of contacts for %s:" % (requestor_id,))

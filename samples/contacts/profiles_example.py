@@ -22,6 +22,7 @@
 __author__ = 'jtoledo (Julian Toledo)'
 
 
+from __future__ import print_function
 import getopt
 import getpass
 import sys
@@ -78,7 +79,7 @@ class ProfilesSample(object):
     Args:
       entry: A gdata.contacts.ProfilesEntry
     """
-    print('\n%s' % (entry.title.text))    
+    print('\n%s' % (entry.title.text))
     for email in entry.email:
       if email.primary == 'true':
         print('Email: %s (primary)' % (email.address))

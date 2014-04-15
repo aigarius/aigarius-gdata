@@ -17,6 +17,7 @@
 
 __author__ = 'kunalmshah.userid (Kunal Shah)'
 
+from __future__ import print_function
 import sys
 import os.path
 import getopt
@@ -29,11 +30,11 @@ class OAuthSample(object):
 
   def __init__(self, consumer_key, consumer_secret):
     """Constructor for the OAuthSample object.
-    
+
     Takes a consumer key and consumer secret, store them in class variables,
     creates a DocsService client to be used to make calls to
     the Documents List Data API.
-    
+
     Args:
       consumer_key: string Domain identifying third_party web application.
       consumer_secret: string Secret generated during registration.
@@ -44,13 +45,13 @@ class OAuthSample(object):
 
   def _PrintFeed(self, feed):
     """Prints out the contents of a feed to the console.
-   
+
     Args:
       feed: A gdata.docs.DocumentListFeed instance.
     """
     if not feed.entry:
       print('No entries in feed.\n')
-    
+
     docs_list = list(enumerate(feed.entry, start = 1))
     for i, entry in docs_list:
       print('%d. %s\n' % (i, entry.title.text.encode('UTF-8')))
@@ -59,7 +60,7 @@ class OAuthSample(object):
     """Retrieves a list of all of a user's documents and displays them."""
     feed = self.gd_client.GetDocumentListFeed()
     self._PrintFeed(feed)
-  
+
   def Run(self):
     """Demonstrates usage of OAuth authentication mode and retrieves a list of
     documents using the Document List Data API."""
@@ -91,7 +92,7 @@ class OAuthSample(object):
 
 def main():
   """Demonstrates usage of OAuth authentication mode.
-  
+
   Prints a list of documents. This demo uses HMAC-SHA1 signature method.
   """
   # Parse command line options

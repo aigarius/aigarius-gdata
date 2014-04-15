@@ -17,7 +17,7 @@
 
 __author__ = 'api.jscudder@gmail.com (Jeff Scudder)'
 
-
+from __future__ import print_function
 import unittest
 
 class ModuleTestRunner(object):
@@ -54,4 +54,4 @@ class ModuleTestRunner(object):
       # We have set all of the applicable settings for the module, now
       # run the tests.
       print('\nRunning all tests in module', module.__name__)
-      runner.run(unittest.defaultTestLoader.loadTestsFromModule(module))    
+      runner.run(unittest.defaultTestLoader.loadTestsFromModule(module))

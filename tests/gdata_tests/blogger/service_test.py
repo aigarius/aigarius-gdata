@@ -19,6 +19,7 @@
 
 __author__ = 'api.jscudder (Jeffrey Scudder)'
 
+from __future__ import print_function
 import unittest
 import getpass
 import atom
@@ -31,9 +32,9 @@ password = ''
 test_blog_id = ''
 
 class BloggerCrudTests(unittest.TestCase):
-  
+
   def setUp(self):
-    self.client = gdata.blogger.service.BloggerService(email=username, 
+    self.client = gdata.blogger.service.BloggerService(email=username,
         password=password, source='GoogleInc-PythonBloggerUnitTests-1')
     # TODO: if the test_blog_id is not set, get the list of the user's blogs
     # and prompt for which blog to add the test posts to.
@@ -77,7 +78,7 @@ class BloggerCrudTests(unittest.TestCase):
 
     new_comment = gdata.blogger.CommentEntry()
     new_comment.content = atom.Content(text='Test comment')
-    posted = self.client.AddComment(new_comment, blog_id=blog_id, 
+    posted = self.client.AddComment(new_comment, blog_id=blog_id,
         post_id=post_id)
     self.assertEquals(posted.content.text, new_comment.content.text)
 

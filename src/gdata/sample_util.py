@@ -19,6 +19,7 @@
 
 # This module is used for version 2 of the Google Data APIs.
 
+from __future__ import print_function
 import sys
 import getpass
 import urllib.request, urllib.parse, urllib.error

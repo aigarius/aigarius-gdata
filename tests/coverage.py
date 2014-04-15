@@ -42,6 +42,7 @@ coverage.py -a [-d dir] FILE1 FILE2 ...
 Coverage data is saved in the file .coverage by default.  Set the
 COVERAGE_FILE environment variable to save it somewhere else."""
 
+from __future__ import print_function
 import os
 import re
 import string

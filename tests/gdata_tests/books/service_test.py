@@ -2,6 +2,7 @@
 
 __author__ = "James Sams <sams.james@gmail.com>"
 
+from __future__ import print_function
 import unittest
 import getpass
 
@@ -15,9 +16,9 @@ username = ""
 password = ""
 
 class BookCRUDTests(unittest.TestCase):
-    
+
     def setUp(self):
-        self.service = gdata.books.service.BookService(email=username, 
+        self.service = gdata.books.service.BookService(email=username,
                 password=password, source="Google-PythonGdataTest-1")
         if username and password:
             self.authenticated = True
@@ -45,11 +46,11 @@ class BookCRUDTests(unittest.TestCase):
         entry = self.service.get_by_google_id("b7GZr5Btp30C")
         entry = self.service.add_item_to_library(entry)
         lib = list(self.service.get_library())
-        self.assert_(entry.to_dict()['title'] in 
+        self.assert_(entry.to_dict()['title'] in
             [x.to_dict()['title'] for x in lib])
         self.service.remove_item_from_library(entry)
         lib = list(self.service.get_library())
-        self.assert_(entry.to_dict()['title'] not in 
+        self.assert_(entry.to_dict()['title'] not in
             [x.to_dict()['title'] for x in lib])
 
     def testAnnotations(self):

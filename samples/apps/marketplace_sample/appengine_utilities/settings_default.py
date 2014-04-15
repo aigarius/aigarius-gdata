@@ -29,8 +29,9 @@ __author__="jbowman"
 __date__ ="$Sep 11, 2009 4:20:11 PM$"
 
 
+from __future__ import print_function
 # Configuration settings for the session class.
-session = {    
+session = {
     "COOKIE_NAME": "gaeutilities_session",
     "DEFAULT_COOKIE_PATH": "/",
     "DEFAULT_COOKIE_DOMAIN": False, # Set to False if you do not want this value
@@ -41,7 +42,7 @@ session = {
     "INTEGRATE_FLASH": True,        # integrate functionality from flash module?
     "SET_COOKIE_EXPIRES": True,     # Set to True to add expiration field to
                                     # cookie
-    "WRITER":"datastore",           # Use the datastore writer by default. 
+    "WRITER":"datastore",           # Use the datastore writer by default.
                                     # cookie is the other option.
     "CLEAN_CHECK_PERCENT": 50,      # By default, 50% of all requests will clean
                                     # the datastore of expired sessions

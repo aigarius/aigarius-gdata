@@ -23,6 +23,7 @@
 __author__ = 'pti@google.com (Prashant Tiwari)'
 
 
+from __future__ import print_function
 from optparse import OptionParser
 import os
 from gdata.apps.migration import service
@@ -53,7 +54,7 @@ class EmailMigrationSample(object):
 
   def Migrate(self, path):
     """Migrates messages at the given path.
-    
+
     Args:
       path: The file or directory path where messages are stored
     """
@@ -76,14 +77,14 @@ class EmailMigrationSample(object):
         print("Found no .txt file in the directory")
         return
       elif len(txt_file_paths) == 1:
-        # Don't use threading if there's only one txt file in the dir 
+        # Don't use threading if there's only one txt file in the dir
         self._MigrateOneMail(txt_file_paths[0])
       else:
         self._MigrateManyMails(txt_file_paths)
 
   def _MigrateOneMail(self, path):
-    """Imports a single message via the ImportMail service. 
-    
+    """Imports a single message via the ImportMail service.
+
     Args:
       path: The path of the message file
     """
@@ -96,8 +97,8 @@ class EmailMigrationSample(object):
     print("Successfully migrated 1 message.")
 
   def _MigrateManyMails(self, paths):
-    """Imports several messages via the ImportMultipleMails service. 
-    
+    """Imports several messages via the ImportMultipleMails service.
+
     Args:
       paths: List of paths of message files
     """
@@ -113,13 +114,13 @@ class EmailMigrationSample(object):
 
   def _ReadFileAsString(self, path):
     """Reads the file found at path into a string
-    
+
     Args:
       path: The path of the message file
-    
+
     Returns:
       The file contents as a string
-    
+
     Raises:
       IOError: An error occurred while trying to read the file
     """

@@ -18,6 +18,7 @@
 
 __author__ = 'afshar@google.com (Ali Afshar)'
 
+from __future__ import print_function
 
 def Run(source_file):
   """Load a source file and run a sample from it."""

@@ -12,6 +12,7 @@
 
 __revision__ = "$Id: test.py,v 1.16 2004/08/13 22:24:18 akuchling Exp $"
 
+from __future__ import print_function
 import binascii
 import string
 import testdata
@@ -29,7 +30,7 @@ def print_timing (size, delta, verbose):
             print('Unable to measure time -- elapsed time too small')
         else:
             print('%.2f K/sec' % (size/delta))
-            
+
 def exerciseBlockCipher(cipher, verbose):
     import string, time
     try:

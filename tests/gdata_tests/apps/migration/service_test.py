@@ -20,6 +20,7 @@
 __author__ = 'google-apps-apis@googlegroups.com'
 
 
+from __future__ import print_function
 import getpass
 import unittest
 import gdata.apps.migration.service

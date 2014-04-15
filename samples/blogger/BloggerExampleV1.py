@@ -32,6 +32,7 @@
 __author__ = 'lkeppler@google.com (Luke Keppler)'
 
 
+from __future__ import print_function
 from gdata import service
 import gdata
 import atom
@@ -96,7 +97,7 @@ class BloggerExample:
       entry.control = control
 
     # Ask the service to insert the new entry.
-    return self.service.Post(entry, 
+    return self.service.Post(entry,
       '/feeds/' + self.blog_id + '/posts/default')
 
   def PrintAllPosts(self):
@@ -121,7 +122,7 @@ class BloggerExample:
     have been created or updated in the period between the start_time and
     end_time parameters.  The method creates the query, submits it to the
     GDataService, and then displays the results.
-  
+
     Note that while the start_time is inclusive, the end_time is exclusive, so
     specifying an end_time of '2007-07-01' will include those posts up until
     2007-6-30 11:59:59PM.
@@ -160,12 +161,12 @@ class BloggerExample:
     The new_title is the text to use for the post's new title.  Returns: a
     GDataEntry containing the newly-updated post.
     """
-    
+
     # Set the new title in the Entry object
     entry_to_update.title = atom.Title('xhtml', new_title)
-    
+
     # Grab the edit URI
-    edit_uri = entry_to_update.GetEditLink().href  
+    edit_uri = entry_to_update.GetEditLink().href
 
     return self.service.Put(entry_to_update, edit_uri)
 
@@ -191,7 +192,7 @@ class BloggerExample:
     """This method displays all the comments for the given post.  First the
     comment feed's URI is built using the given post ID.  Then the method
     requests the comments feed and displays the results.  Takes the post_id
-    of the post on which to view comments. 
+    of the post on which to view comments.
     """
 
     # Build comment feed URI and request comments on the specified post
@@ -209,7 +210,7 @@ class BloggerExample:
     """This method removes the comment specified by the given edit_link_href, the
     URI for editing the comment.
     """
-    
+
     feed_uri = '/feeds/' + self.blog_id + '/' + post_id + '/comments/default/' + comment_id
     self.service.Delete(feed_uri)
 
@@ -219,7 +220,7 @@ class BloggerExample:
     """
 
     self.service.Delete(edit_link_href)
-  
+
   def run(self):
     """Runs each of the example methods defined above, demonstrating how to
     interface with the Blogger service.
@@ -227,19 +228,19 @@ class BloggerExample:
 
     # Demonstrate retrieving a list of the user's blogs.
     self.PrintUserBlogTitles()
-  
+
     # Demonstrate how to create a draft post.
     draft_post = self.CreatePost("Snorkling in Aruba",
       "<p>We had <b>so</b> much fun snorkling in Aruba<p>",
       "Post author", True)
     print("Successfully created draft post: \"" + draft_post.title.text + "\".\n")
-  
+
     # Demonstrate how to publish a public post.
     public_post = self.CreatePost("Back from vacation",
       "<p>I didn't want to leave Aruba, but I ran out of money :(<p>",
       "Post author", False)
     print("Successfully created public post: \"" + public_post.title.text + "\".\n")
-  
+
     # Demonstrate various feed queries.
     print("Now listing all posts.")
     self.PrintAllPosts()
@@ -250,36 +251,36 @@ class BloggerExample:
     print("Now updating the title of the post we just created:")
     public_post = self.UpdatePostTitle(public_post, "The party's over")
     print("Successfully changed the post's title to \"" + public_post.title.text + "\".\n")
-  
+
     # Demonstrate how to retrieve the comments for a post.
 
     # Get the post ID and build the comments feed URI for the specified post
-    self_id = public_post.id.text 
+    self_id = public_post.id.text
     tokens = self_id.split("-")
     post_id = tokens[-1]
-    
+
     print("Now posting a comment on the post titled: \"" + public_post.title.text + "\".")
     comment = self.CreateComment(post_id, "Did you see any sharks?")
     print("Successfully posted \"" + comment.content.text + "\" on the post titled: \"" + public_post.title.text + "\".\n")
-    
+
     comment_id = comment.GetEditLink().href.split("/")[-1]
-    
+
     print("Now printing all comments")
     self.PrintAllComments(post_id)
-    
+
     # Delete the comment we just posted
     print("Now deleting the comment we just posted")
     self.DeleteComment(post_id, comment_id)
-    print("Successfully deleted comment.") 
+    print("Successfully deleted comment.")
     self.PrintAllComments(post_id)
 
-    # Get the post's edit URI    
+    # Get the post's edit URI
     edit_uri = public_post.GetEditLink().href
-    
+
     # Demonstrate deleting posts.
     print("Now deleting the post titled: \"" + public_post.title.text + "\".")
     self.DeletePost(edit_uri)
-    print("Successfully deleted post.") 
+    print("Successfully deleted post.")
     self.PrintAllPosts()
 
 
@@ -304,7 +305,7 @@ def main():
       email = a
     elif o == "--password":
       password = a
-    
+
   if email == '' or password == '':
     print ('python BloggerExample.py --email [email] --password [password]')
     sys.exit(2)

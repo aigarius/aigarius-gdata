@@ -21,6 +21,7 @@
 __author__ = 'vbarathan@gmail.com (Prakash Barathan)'
 
 
+from __future__ import print_function
 from gdata import service
 import gdata.codesearch.service
 import gdata

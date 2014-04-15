@@ -16,6 +16,7 @@
 
 __author__ = 'Gunjan Sharma <gunjansharma@google.com>'
 
+from __future__ import print_function
 import getopt
 import getpass
 import sys
@@ -80,7 +81,7 @@ class OrgUnitAddressBook(object):
     self.sites_client.ClientLogin(email, password, self.sites_client.source);
     #Get the sites feed
     self.all_site_feed = self.sites_client.GetSiteFeed()
-    
+
     # Create google contacts object
     self.profiles_client = gdata.contacts.client.ContactsClient(domain=domain)
     self.profiles_client.client_login(email, password, 'cp', service='cp')
@@ -105,7 +106,7 @@ class OrgUnitAddressBook(object):
     site_name = site_title.replace(' ', '-')
     site_name = site_name.lower()
     return site_name
-  
+
   def _GetSiteURI(self, site_title):
     """Returns the corresponding uri to the site.
        Needed to get the link to a particular user page.
@@ -118,7 +119,7 @@ class OrgUnitAddressBook(object):
     """
     uri = URI % (self.domain, self._GetSiteName(site_title))
     return uri
-    
+
   def _CreateSite(self, site_title, description=DESCRIPTION, theme=THEME):
     """Creates a site with the site_title, if it not already exists.
 
@@ -132,7 +133,7 @@ class OrgUnitAddressBook(object):
     """
     site_entry = None
     site_found = False
-    site_name = self._GetSiteName(site_title)    
+    site_name = self._GetSiteName(site_title)
     for site in self.all_site_feed.entry:
       if site.site_name.text == site_name:
         site_found = True
@@ -162,23 +163,23 @@ class OrgUnitAddressBook(object):
 
     Returns:
       A Dictionary of email address to ContentEntry objects
-    """    
+    """
     profiles = []
     feed_uri = self.profiles_client.GetFeedUri('profiles')
     while feed_uri:
       feed = self.profiles_client.GetProfilesFeed(uri=feed_uri)
       profiles.extend(feed.entry)
       feed_uri = feed.FindNextLink()
-    
+
     profiles_dict = {}
     for profile in profiles:
       for email in profile.email:
         if email.primary and email.primary == 'true':
           profiles_dict[email.address] = profile
           break
-          
+
     return profiles_dict
-    
+
   def _CreateUserPageHTML(self, profile):
     """Creates HTML for a user profile.
 
@@ -188,7 +189,7 @@ class OrgUnitAddressBook(object):
 
     Returns:
       A String which is the HTML code.
-    """    
+    """
     address_string = ''
     email_string = ''
     for address in profile.structured_postal_address:
@@ -196,10 +197,10 @@ class OrgUnitAddressBook(object):
     for email in profile.email:
       if email.primary and email.primary == 'true':
         email_string = '%s<li>%s</li><br />' % (email_string, email.address)
-    
+
     new_html = TEMPLATE_USER_HTML % (profile.name.full_name.text,
                          str(profile.gender), address_string, email_string)
-    
+
     return HTML_HEADER + new_html + HTML_FOOTER
 
   def _GetUserPageName(self, user_email):
@@ -219,23 +220,23 @@ class OrgUnitAddressBook(object):
 
   def _CreateUserPages(self):
     """Makes all the user pages"""
-    
+
     entry = self._CreateSite(USER_SITE_TITLE)
 
-    #Delete all the pages 
+    #Delete all the pages
     self._DeleteAllPages()
-    
+
     users_profile = self._GetUsersProfileFeed()
     users = self.org_unit_client.RetrieveAllOrgUsers(self.customer_id)
     for user in users:
       user_email = user['orgUserEmail']
       user_profile = users_profile[user_email]
-      new_html = self._CreateUserPageHTML(user_profile)  
+      new_html = self._CreateUserPageHTML(user_profile)
       user_page_name = self._GetUserPageName(user_email)
-      
+
       self.sites_client.CreatePage('webpage', user_profile.name.full_name.text,
                                    html=new_html, page_name=user_page_name)
-  
+
   def _GetOrgUnitPageHTML(self, path):
     """Creates HTML for a Org Unit Page.
 
@@ -245,7 +246,7 @@ class OrgUnitAddressBook(object):
     Returns:
       A String which is the HTML code.
     """
-    
+
     domain_users = self.org_unit_client.RetrieveOrgUnitUsers(self.customer_id,
                                                              path)
     new_html = '<p>'
@@ -257,7 +258,7 @@ class OrgUnitAddressBook(object):
                                          site_uri + user_page_name, user_email)
     new_html = new_html + '</p>'
     return HTML_HEADER + new_html + HTML_FOOTER
-  
+
   def _SetOrgSiteHomePage(self):
     """Sets up the home page for Org Unit Site"""
     new_html = self._GetOrgUnitPageHTML('/')
@@ -266,7 +267,7 @@ class OrgUnitAddressBook(object):
     home_feed.entry[0].title.text = self.domain
     home_feed.entry[0].content.html = new_html
     self.sites_client.Update(home_feed.entry[0])
-  
+
   def _GetUnitPath(self, path=None):
     """Returns path to the parent unit
 
@@ -283,31 +284,31 @@ class OrgUnitAddressBook(object):
       path = 'home/' + path
     else:
       path = 'home'
-  
+
     uri = path_uri % (self.sites_client.MakeContentFeedUri(), path)
     return uri
-  
+
   def _CreateOrgUnitPages(self):
     """Creates all the org unit pages"""
-    
-    entry = self._CreateSite(ORG_SITE_TITLE)    
-    #Delete all the pages 
+
+    entry = self._CreateSite(ORG_SITE_TITLE)
+    #Delete all the pages
     self._DeleteAllPages()
-    
+
     self._SetOrgSiteHomePage()
-    
+
     orgUnits = self.org_unit_client.RetrieveAllOrgUnits(self.customer_id)
     for unit in orgUnits:
-      parent_uri = self._GetUnitPath(unit['parentOrgUnitPath'])      
+      parent_uri = self._GetUnitPath(unit['parentOrgUnitPath'])
       parent_feed = self.sites_client.GetContentFeed(uri=parent_uri)
-  
-      new_html = self._GetOrgUnitPageHTML(unit['orgUnitPath'])      
+
+      new_html = self._GetOrgUnitPageHTML(unit['orgUnitPath'])
       self.sites_client.CreatePage('webpage', unit['name'], html=new_html,
                                    parent=parent_feed.entry[0])
 
   def Run(self):
     """Controls the entire flow of the sites making process"""
-    
+
     print('Starting the process. This may take few minutes.')
     print('Creating user pages...')
     self._CreateUserPages()

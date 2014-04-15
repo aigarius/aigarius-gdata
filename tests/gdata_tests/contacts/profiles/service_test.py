@@ -25,6 +25,7 @@
 __author__ = 'jtoledo (Julian Toledo)'
 
 
+from __future__ import print_function
 import getopt
 import getpass
 import sys
@@ -42,7 +43,7 @@ GDATA_VER_HEADER = 'GData-Version'
 
 class ProfilesServiceTest(unittest.TestCase):
 
-  def setUp(self):    
+  def setUp(self):
     additional_headers = {GDATA_VER_HEADER: 3}
     self.gd_client = gdata.contacts.service.ContactsService(
         contact_list=domain, additional_headers=additional_headers )

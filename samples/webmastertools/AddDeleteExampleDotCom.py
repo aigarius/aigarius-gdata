@@ -15,6 +15,7 @@
 # limitations under the License.
 
 
+from __future__ import print_function
 import urllib.request, urllib.parse, urllib.error
 
 import gdata.webmastertools.service
@@ -34,7 +35,7 @@ username = input('Please enter your username: ')
 password = getpass.getpass()
 
 client = gdata.webmastertools.service.GWebmasterToolsService(
-    email=username, 
+    email=username,
     password=password, source='PythonWebmasterToolsSample-1')
 
 EXAMPLE_SITE = 'http://www.example.com/'

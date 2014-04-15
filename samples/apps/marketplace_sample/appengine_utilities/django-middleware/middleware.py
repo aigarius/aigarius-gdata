@@ -1,5 +1,6 @@
 import http.cookies
 import os
+from __future__ import print_function
 
 from common.appengine_utilities import sessions
 
