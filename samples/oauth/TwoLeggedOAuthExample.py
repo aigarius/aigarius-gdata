@@ -20,6 +20,7 @@
 
 __author__ = 'e.bidelman (Eric Bidelman)'
 
+from __future__ import print_function
 import gdata.gauth
 import gdata.contacts.client
 import gdata.docs.client

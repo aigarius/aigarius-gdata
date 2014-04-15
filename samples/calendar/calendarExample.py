@@ -18,6 +18,7 @@
 __author__ = 'api.rboyd@gmail.com (Ryan Boyd)'
 
 
+from __future__ import print_function
 try:
   from xml.etree import ElementTree
 except ImportError:

@@ -31,6 +31,7 @@ You can get help for command-line arguments as
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 import getopt
 import sys
 import gdata.apps.client
@@ -113,7 +114,7 @@ class OrgUnitProvisioning(object):
 
   def _GetChoice(self, for_field):
     """Gets input for boolean fields.
-    
+
     Args:
       for_value : string field for which input is required
 
@@ -152,7 +153,7 @@ class OrgUnitProvisioning(object):
 
   def _CreateOrgUnit(self, customer_id):
     """Creates a new org unit.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -176,7 +177,7 @@ class OrgUnitProvisioning(object):
 
   def _UpdateOrgUnit(self, customer_id):
     """Updates an org unit.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -213,7 +214,7 @@ class OrgUnitProvisioning(object):
 
   def _RetrieveOrgUnit(self, customer_id):
     """Retrieves a single org unit.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -230,10 +231,10 @@ class OrgUnitProvisioning(object):
 
   def _RetrieveAllOrgUnits(self, customer_id):
     """Retrieves all org units.
-    
+
     Args:
       customer_id : string customer_id of organization
-    """    
+    """
     try:
       response = self.client.RetrieveAllOrgUnits(customer_id=customer_id)
       for entry in response.entry:
@@ -244,7 +245,7 @@ class OrgUnitProvisioning(object):
 
   def _RetrieveSubOrgUnits(self, customer_id):
     """Retrieves all sub org units of an org unit.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -265,7 +266,7 @@ class OrgUnitProvisioning(object):
 
   def _MoveUsers(self, customer_id):
     """Moves users to an org unit.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -293,7 +294,7 @@ class OrgUnitProvisioning(object):
 
   def _DeleteOrgUnit(self, customer_id):
     """Deletes an org unit.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -310,7 +311,7 @@ class OrgUnitProvisioning(object):
 
   def _UpdateOrgUser(self, customer_id):
     """Updates the orgunit of an org user.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -330,7 +331,7 @@ class OrgUnitProvisioning(object):
 
   def _RetrieveOrgUser(self, customer_id):
     """Retrieves an organization user.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -348,7 +349,7 @@ class OrgUnitProvisioning(object):
 
   def _RetrieveOrgUnitUsers(self, customer_id):
     """Retrieves all org users of an org unit.
-    
+
     Args:
       customer_id : string customer_id of organization
     """
@@ -369,7 +370,7 @@ class OrgUnitProvisioning(object):
 
   def _RetrieveAllOrgUsers(self, customer_id):
     """Retrieves all org users.
-    
+
     Args:
       customer_id : string customer_id of organization
     """

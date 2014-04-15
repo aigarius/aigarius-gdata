@@ -22,6 +22,7 @@ email monitors.
 
 __author__ = 'Gunjan Sharma <gunjansharma@google.com>'
 
+from __future__ import print_function
 from datetime import datetime
 import getopt
 import re

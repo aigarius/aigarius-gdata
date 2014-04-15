@@ -16,6 +16,7 @@
 
 __author__ = 'tmatsuo@sios.com (Takashi Matsuo)'
 
+from __future__ import print_function
 import unittest
 try:
   from xml.etree import ElementTree
@@ -34,7 +35,7 @@ apps_password = ''
 
 
 class AppsServiceUnitTest01(unittest.TestCase):
-  
+
   def setUp(self):
     self.postfix = time.strftime("%Y%m%d%H%M%S")
     email = apps_username + '@' + apps_domain
@@ -150,7 +151,7 @@ class AppsServiceUnitTest01(unittest.TestCase):
       new_user_entry = self.apps_client.UpdateUser(user_name, created_user)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-    
+
     self.assert_(isinstance(new_user_entry, gdata.apps.UserEntry),
         "new user entry must be an instance of gdata.apps.UserEntry: %s"
         % new_user_entry)
@@ -203,7 +204,7 @@ class AppsServiceUnitTest01(unittest.TestCase):
     else:
       self.fail('No exception occurred')
     self.created_user = None
-      
+
     # make sure that DeleteUser fails with AppsForYourDomainException.
     try:
       self.apps_client.DeleteUser(user_name)
@@ -286,7 +287,7 @@ class AppsServiceUnitTest01(unittest.TestCase):
       self.fail('No exception occurred')
 
 class AppsServiceUnitTest02(unittest.TestCase):
-  
+
   def setUp(self):
     self.postfix = time.strftime("%Y%m%d%H%M%S")
     email = apps_username + '@' + apps_domain
@@ -311,7 +312,7 @@ class AppsServiceUnitTest02(unittest.TestCase):
 
   def test001MethodsForEmaillist(self):
     """Tests methods for emaillist """
-    
+
     user_name = 'YujiMatsuo-' + self.postfix
     family_name = 'Matsuo'
     given_name = 'Yuji'
@@ -366,7 +367,7 @@ class AppsServiceUnitTest02(unittest.TestCase):
     self.assert_(isinstance(recipient, gdata.apps.EmailListRecipientEntry),
         "Return value of AddRecipientToEmailList method must be an instance " +
         "of EmailListRecipientEntry: %s" % recipient)
-    self.assertEquals(recipient.who.email, 
+    self.assertEquals(recipient.who.email,
                       user_yuji.login.user_name + '@' + apps_domain)
 
     try:
@@ -418,7 +419,7 @@ class AppsServiceUnitTest02(unittest.TestCase):
       if email_list.email_list.name == list_name:
         succeed = True
     self.assert_(succeed, "There must be an email list named %s" % list_name)
-    
+
     # tests RetrieveEmailLists method.
     try:
       list_feed = self.apps_client.RetrieveEmailLists(
@@ -452,7 +453,7 @@ class AppsServiceUnitTest02(unittest.TestCase):
 
 
 class AppsServiceUnitTest03(unittest.TestCase):
-  
+
   def setUp(self):
     self.postfix = time.strftime("%Y%m%d%H%M%S")
     email = apps_username + '@' + apps_domain

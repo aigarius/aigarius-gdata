@@ -12,6 +12,7 @@
 
 __revision__ = "$Id: randpool.py,v 1.14 2004/05/06 12:56:54 akuchling Exp $"
 
+from __future__ import print_function
 import time, array, types, warnings, os.path
 from Crypto.Util.number import long_to_bytes
 try:

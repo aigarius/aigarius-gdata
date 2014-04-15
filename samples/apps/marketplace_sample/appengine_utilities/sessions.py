@@ -27,6 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 # main python imports
+from __future__ import print_function
 import os
 import time
 import datetime
@@ -69,7 +70,7 @@ class _AppEngineUtilities_Session(db.Model):
     last_activity = db.DateTimeProperty()
     dirty = db.BooleanProperty(default=False)
     working = db.BooleanProperty(default=False)
-    deleted = db.BooleanProperty(default=False) 
+    deleted = db.BooleanProperty(default=False)
 
     def put(self):
         """
@@ -136,9 +137,9 @@ class _AppEngineUtilities_Session(db.Model):
                 return session
             else:
                 return None
- 
+
         # Not in memcache, check datastore
-        
+
         ds_session = db.get(str(session_key))
         if ds_session:
           sessionAge = datetime.datetime.now() - ds_session.last_activity
@@ -243,7 +244,7 @@ class _AppEngineUtilities_Session(db.Model):
                     memcache.set("_AppEngineUtilities_Session_%s" % \
                         (str(self.key())), results[0])
         return True
-            
+
 class _AppEngineUtilities_SessionData(db.Model):
     """
     Model for the session data in the datastore.
@@ -316,7 +317,7 @@ class _AppEngineUtilities_SessionData(db.Model):
                 memcache.set("_AppEngineUtilities_SessionData_%s" % \
                     (str(self.session.key())), mc_items)
         return True
-        
+
 
 class _DatastoreWriter(object):
 
@@ -362,7 +363,7 @@ class _DatastoreWriter(object):
             sessdata.content = pickle.dumps(value)
             sessdata.model = None
         sessdata.session = session.session
-            
+
         session.cache[keyname] = value
         return sessdata.put()
 
@@ -627,7 +628,7 @@ class Session(object):
         # randomly delete old stale sessions in the datastore (see
         # CLEAN_CHECK_PERCENT variable)
         if random.randint(1, 100) < clean_check_percent:
-            self._clean_old_sessions() 
+            self._clean_old_sessions()
 
     def new_sid(self):
         """
@@ -647,9 +648,9 @@ class Session(object):
     def _get(self, keyname=None):
         """
         private method
-        
+
         Return all of the SessionData object data from the datastore only,
-        unless keyname is specified, in which case only that instance of 
+        unless keyname is specified, in which case only that instance of
         SessionData is returned.
 
         Important: This does not interact with memcache and pulls directly
@@ -666,11 +667,11 @@ class Session(object):
                 return self.session.get_item(keyname)
             return self.session.get_items()
         return None
-    
+
     def _validate_key(self, keyname):
         """
         private method
-        
+
         Validate the keyname, making sure it is set and not a reserved name.
 
         Returns the validated keyname.
@@ -706,7 +707,7 @@ class Session(object):
     def _delete_session(self):
         """
         private method
-        
+
         Delete the session and all session data.
 
         Returns True.
@@ -816,7 +817,7 @@ class Session(object):
         if len(self.session.sid) > 2:
             self.session.sid.remove(self.session.sid[0])
         self.session.sid.append(self.sid)
-        
+
         return self.sid
 
     def flush(self):

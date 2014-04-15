@@ -31,6 +31,7 @@ against by using the '--rev' option.
 # This code is derived from appcfg.py in the App Engine SDK (open source),
 # and from ASPN recipe #146306.
 
+from __future__ import print_function
 import configparser
 import http.cookiejar
 import fnmatch

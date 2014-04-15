@@ -20,6 +20,7 @@
 __author__ = 'Alexandre Vivien (alex@simplecode.fr)'
 
 
+from __future__ import print_function
 import urllib.request, urllib.parse, urllib.error
 import unittest
 try:
@@ -94,7 +95,7 @@ class OrganizationTest(unittest.TestCase):
       self.fail('Unexpected exception occurred: %s' % e)
 
     self.created_users.append(self.user_taro)
-    
+
     user_name = 'alexandrevivien-' + self.postfix
     family_name = 'Vivien'
     given_name = 'Alexandre'
@@ -139,15 +140,15 @@ class OrganizationTest(unittest.TestCase):
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
     print('tests RetrieveCustomerId successful')
-    
+
     # tests CreateOrgUnit method
     orgUnit01_name = 'OrgUnit01-' + self.postfix
     orgUnit02_name = 'OrgUnit02-' + self.postfix
     sub0rgUnit01_name = 'SubOrgUnit01-' + self.postfix
     orgUnit03_name = 'OrgUnit03-' + self.postfix
     try:
-      orgUnit01 = self.organization_client.CreateOrgUnit(self.customer_id, 
-                                                         name=orgUnit01_name, 
+      orgUnit01 = self.organization_client.CreateOrgUnit(self.customer_id,
+                                                         name=orgUnit01_name,
                                                          parent_org_unit_path='/',
                                                          description='OrgUnit Test 01',
                                                          block_inheritance=False)
@@ -168,7 +169,7 @@ class OrganizationTest(unittest.TestCase):
                                                          block_inheritance=False)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-    
+
     self.assertEquals(orgUnit01['orgUnitPath'], urllib.parse.quote_plus(orgUnit01_name))
     self.assertEquals(orgUnit02['orgUnitPath'], urllib.parse.quote_plus(orgUnit02_name))
     self.assertEquals(sub0rgUnit01['orgUnitPath'], urllib.parse.quote_plus(orgUnit02_name) + '/' + urllib.parse.quote_plus(sub0rgUnit01_name))
@@ -178,7 +179,7 @@ class OrganizationTest(unittest.TestCase):
     self.created_org_units.append(sub0rgUnit01['orgUnitPath'])
     self.created_org_units.append(orgUnit03['orgUnitPath'])
     print('tests CreateOrgUnit successful')
-    
+
     # tests UpdateOrgUnit method
     try:
       updated_orgunit = self.organization_client.UpdateOrgUnit(self.customer_id,
@@ -202,7 +203,7 @@ class OrganizationTest(unittest.TestCase):
     self.assertEquals(retrieved_orgunit['orgUnitPath'], self.created_org_units[1])
     self.assertEquals(retrieved_suborgunit['orgUnitPath'], self.created_org_units[2])
     print('tests RetrieveOrgUnit successful')
-   
+
     # tests RetrieveAllOrgUnits method
     try:
       retrieved_orgunits = self.organization_client.RetrieveAllOrgUnits(self.customer_id)
@@ -211,7 +212,7 @@ class OrganizationTest(unittest.TestCase):
 
     self.assertTrue(len(retrieved_orgunits) >= len(self.created_org_units))
     print('tests RetrieveAllOrgUnits successful')
-   
+
     # tests MoveUserToOrgUnit method
     try:
       updated_orgunit01 = self.organization_client.MoveUserToOrgUnit(self.customer_id,
@@ -228,7 +229,7 @@ class OrganizationTest(unittest.TestCase):
     self.assertEquals(updated_orgunit02['usersMoved'], self.user_taro.login.user_name + '@' + domain + ',' + \
                                                        self.user_alex.login.user_name + '@' + domain)
     print('tests MoveUserToOrgUnit successful')
-    
+
     # tests RetrieveSubOrgUnits method
     try:
       retrieved_suborgunits = self.organization_client.RetrieveSubOrgUnits(self.customer_id,
@@ -239,7 +240,7 @@ class OrganizationTest(unittest.TestCase):
     self.assertEquals(len(retrieved_suborgunits), 1)
     self.assertEquals(retrieved_suborgunits[0]['orgUnitPath'], self.created_org_units[2])
     print('tests RetrieveSubOrgUnits successful')
-    
+
     # tests RetrieveOrgUser method
     try:
       retrieved_orguser = self.organization_client.RetrieveOrgUser(self.customer_id,
@@ -250,7 +251,7 @@ class OrganizationTest(unittest.TestCase):
     self.assertEquals(retrieved_orguser['orgUserEmail'], self.user_yuji.login.user_name + '@' + domain)
     self.assertEquals(retrieved_orguser['orgUnitPath'], self.created_org_units[0])
     print('tests RetrieveOrgUser successful')
-    
+
     # tests UpdateOrgUser method
     try:
       updated_orguser = self.organization_client.UpdateOrgUser(self.customer_id,
@@ -262,7 +263,7 @@ class OrganizationTest(unittest.TestCase):
     self.assertEquals(updated_orguser['orgUserEmail'], self.user_alex.login.user_name + '@' + domain)
     self.assertEquals(updated_orguser['orgUnitPath'], self.created_org_units[0])
     print('tests UpdateOrgUser successful')
-  
+
     # tests RetrieveAllOrgUsers method
     try:
       retrieved_orgusers = self.organization_client.RetrieveAllOrgUsers(self.customer_id)
@@ -271,7 +272,7 @@ class OrganizationTest(unittest.TestCase):
 
     self.assertTrue(len(retrieved_orgusers) >= len(self.created_users))
     print('tests RetrieveAllOrgUsers successful')
-    
+
     """ This test needs to create more than 100 test users
     # tests RetrievePageOfOrgUsers method
     try:
@@ -288,7 +289,7 @@ class OrganizationTest(unittest.TestCase):
 
     print 'tests RetrievePageOfOrgUsers successful'
     """
-    
+
     # tests RetrieveOrgUnitUsers method
     try:
       retrieved_orgusers = self.organization_client.RetrieveOrgUnitUsers(self.customer_id,
@@ -298,7 +299,7 @@ class OrganizationTest(unittest.TestCase):
 
     self.assertEquals(len(retrieved_orgusers), 2)
     print('tests RetrieveOrgUnitUsers successful')
-    
+
     """ This test needs to create more than 100 test users
     # tests RetrieveOrgUnitPageOfUsers method
     try:

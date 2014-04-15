@@ -18,6 +18,7 @@
 __author__ = 'thesweeheng@gmail.com'
 
 
+from __future__ import print_function
 from gdata.finance.service import \
     FinanceService, PortfolioQuery, PositionQuery
 from gdata.finance import \
@@ -118,8 +119,8 @@ class FinanceTester(object):
   def __init__(self, email, password):
     self.client = FinanceService(source='gdata-finance-test')
     self.client.ClientLogin(email, password)
-  
-  def GetPortfolios(self, with_returns=False, inline_positions=False): 
+
+  def GetPortfolios(self, with_returns=False, inline_positions=False):
     query = PortfolioQuery()
     query.returns = with_returns
     query.positions = inline_positions
@@ -209,10 +210,10 @@ class FinanceTester(object):
         commission=commission))
     return self.client.AddTransaction(txn,
         portfolio_id=portfolio.portfolio_id, ticker_id=ticker)
-  
+
   def Buy(self, portfolio, ticker, **kwargs):
     return self.Transact('Buy', portfolio, ticker, **kwargs)
-  
+
   def Sell(self, portfolio, ticker, **kwargs):
     return self.Transact('Sell', portfolio, ticker, **kwargs)
 

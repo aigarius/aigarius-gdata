@@ -18,6 +18,7 @@
 
 __author__ = 'afshar@google.com (Ali Afshar)'
 
+from __future__ import print_function
 import os.path
 import gdata.data
 import gdata.acl.data

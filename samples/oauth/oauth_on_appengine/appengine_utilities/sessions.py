@@ -27,6 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 # main python imports
+from __future__ import print_function
 import os
 import time
 import datetime
@@ -121,7 +122,7 @@ class _AppEngineUtilities_Session(db.Model):
                 return session
             else:
                 return None
- 
+
         # Not in memcache, check datastore
         query = _AppEngineUtilities_Session.all()
         query.filter("sid = ", session_obj.sid)
@@ -223,7 +224,7 @@ class _AppEngineUtilities_Session(db.Model):
                         self.dirty = True
                         memcache.set("_AppEngineUtilities_Session_" + str(self.session_key), self)
                     valid = True
-            
+
 class _AppEngineUtilities_SessionData(db.Model):
     """
     Model for the session data in the datastore.
@@ -283,7 +284,7 @@ class _AppEngineUtilities_SessionData(db.Model):
                 else:
                     mc_items.remove(item)
                 memcache.set("_AppEngineUtilities_SessionData_" + str(self.session_key), mc_items)
-        
+
 
 class _DatastoreWriter(object):
 
@@ -516,7 +517,7 @@ class Session(object):
         # randomly delete old stale sessions in the datastore (see
         # CLEAN_CHECK_PERCENT variable)
         if random.randint(1, 100) < clean_check_percent:
-            self._clean_old_sessions() 
+            self._clean_old_sessions()
 
     def new_sid(self):
         """
@@ -551,7 +552,7 @@ class Session(object):
     def _get(self, keyname=None):
         """
         Return all of the SessionData object data from the datastore onlye,
-        unless keyname is specified, in which case only that instance of 
+        unless keyname is specified, in which case only that instance of
         SessionData is returned.
         Important: This does not interact with memcache and pulls directly
         from the datastore. This also does not get items from the cookie

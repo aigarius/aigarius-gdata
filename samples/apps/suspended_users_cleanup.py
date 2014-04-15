@@ -23,6 +23,7 @@ Reporting API and delete the user if the last login date is older than
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 import datetime
 import getopt
 import sys

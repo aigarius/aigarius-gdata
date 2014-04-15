@@ -6,6 +6,7 @@
 __revision__ = "$Id: RFC1751.py,v 1.6 2003/04/04 15:15:10 akuchling Exp $"
 
 
+from __future__ import print_function
 import string, binascii
 from functools import reduce
 

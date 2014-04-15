@@ -4,6 +4,7 @@
 
 __revision__ = "$Id: test.py,v 1.7 2002/07/11 14:31:19 akuchling Exp $"
 
+from __future__ import print_function
 import os, sys
 
 

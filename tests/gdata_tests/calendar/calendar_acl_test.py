@@ -16,6 +16,7 @@
 
 __author__ = 'api.lliabraa@google.com (Lane LiaBraaten)'
 
+from __future__ import print_function
 import unittest
 try:
   from xml.etree import ElementTree
@@ -35,16 +36,16 @@ password = ''
 class CalendarServiceAclUnitTest(unittest.TestCase):
   _aclFeedUri = "/calendar/feeds/default/acl/full"
   _aclEntryUri = "%s/user:%s" % (_aclFeedUri, "user@gmail.com",)
-  
+
   def setUp(self):
     self.cal_client = gdata.calendar.service.CalendarService()
-    self.cal_client.email = username 
+    self.cal_client.email = username
     self.cal_client.password = password
     self.cal_client.source = 'GCalendarClient ACL "Unit" Tests'
 
   def tearDown(self):
     # No teardown needed
-    pass  
+    pass
 
   def _getRandomNumber(self):
     """Return a random number as a string for testing"""
@@ -91,18 +92,18 @@ class CalendarServiceAclUnitTest(unittest.TestCase):
     except gdata.service.RequestError as error:
       self.assertEqual(error[0]['status'], 401)
       self.assertEqual(error[0]['reason'], "Authorization required")
-  
+
   def testGetAclEntry(self):
     """Get an ACL entry"""
     self.cal_client.ProgrammaticLogin()
     self.cal_client.GetCalendarAclEntry(self._aclEntryUri)
-    
+
   def testCalendarAclFeedFromString(self):
     """Create an ACL feed from a hard-coded string"""
     aclFeed = gdata.calendar.CalendarAclFeedFromString(test_data.ACL_FEED)
     self.assertEqual("Elizabeth Bennet's access control list", aclFeed.title.text)
     self.assertEqual(2,len(aclFeed.entry))
-    
+
   def testCalendarAclEntryFromString(self):
     """Create an ACL entry from a hard-coded string"""
     aclEntry = gdata.calendar.CalendarAclEntryFromString(test_data.ACL_ENTRY)
@@ -112,14 +113,14 @@ class CalendarServiceAclUnitTest(unittest.TestCase):
     self.assertEqual("http://schemas.google.com/gCal/2005#owner", aclEntry.role.value)
 
   def testCreateAndDeleteAclEntry(self):
-    """Add an ACL rule and verify that is it returned in the ACL feed.  Then delete the rule and 
+    """Add an ACL rule and verify that is it returned in the ACL feed.  Then delete the rule and
        verify that the rule is no longer included in the ACL feed."""
-    # Get the current number of ACL rules   
+    # Get the current number of ACL rules
     self.cal_client.ProgrammaticLogin()
     aclFeed = self.cal_client.GetCalendarAclFeed(self._aclFeedUri)
     original_rule_count = len(aclFeed.entry)
- 
-    # Insert entry 
+
+    # Insert entry
     rule = self._generateAclEntry()
     returned_rule = self.cal_client.InsertAclEntry(rule, self._aclFeedUri)
 
@@ -153,7 +154,7 @@ class CalendarServiceAclUnitTest(unittest.TestCase):
 
     self.cal_client.DeleteAclEntry(updated_rule.GetEditLink().href)
 
-  
+
   def testUpdateAclChangeScopeType(self):
     """Fiendishly try to insert a test ACL rule and attempt to change the scope type (i.e. from 'user' to 'domain').
        Verify that an exception is thrown, then delete the test rule."""
@@ -174,7 +175,7 @@ class CalendarServiceAclUnitTest(unittest.TestCase):
 
     self.cal_client.DeleteAclEntry(updated_rule.GetEditLink().href)
 
-    
+
   def testUpdateAclChangeRoleValue(self):
     """Insert a test ACL rule and attempt to change the scope type (i.e. from 'owner' to 'editor').
        Verify that an exception is thrown, then delete the test rule."""
@@ -189,9 +190,9 @@ class CalendarServiceAclUnitTest(unittest.TestCase):
     updated_rule.role.value = "http://schemas.google.com/gCal/2005#editor"
     returned_rule = self.cal_client.UpdateAclEntry(returned_rule.GetEditLink().href, updated_rule)
     self.assertEqualAclEntry(updated_rule, returned_rule)
-    
+
     self.cal_client.DeleteAclEntry(updated_rule.GetEditLink().href)
-    
+
 if __name__ == '__main__':
   print(('NOTE: Please run these tests only with a test account. ' +
       'The tests may delete or update your data.'))

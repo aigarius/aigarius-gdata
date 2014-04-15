@@ -1,5 +1,6 @@
 """Class for post-handshake certificate checking."""
 
+from __future__ import print_function
 from .utils.cryptomath import hashAndBase64
 from .X509 import X509
 from .X509CertChain import X509CertChain

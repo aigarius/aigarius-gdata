@@ -32,6 +32,7 @@
 __author__ = 'lkeppler@google.com (Luke Keppler)'
 
 
+from __future__ import print_function
 import gdata.blogger.client
 import gdata.client
 import gdata.sample_util
@@ -103,7 +104,7 @@ class BloggerExample:
     have been created or updated in the period between the start_time and
     end_time parameters.  The method creates the query, submits it to the
     GDataService, and then displays the results.
-  
+
     Note that while the start_time is inclusive, the end_time is exclusive, so
     specifying an end_time of '2007-07-01' will include those posts up until
     2007-6-30 11:59:59PM.
@@ -142,7 +143,7 @@ class BloggerExample:
     The new_title is the text to use for the post's new title.  Returns: a
     GDataEntry containing the newly-updated post.
     """
-    
+
     # Set the new title in the Entry object
     entry_to_update.title = atom.data.Title(type='xhtml', text=new_title)
     return self.client.update(entry_to_update)
@@ -162,7 +163,7 @@ class BloggerExample:
     """This method displays all the comments for the given post.  First the
     comment feed's URI is built using the given post ID.  Then the method
     requests the comments feed and displays the results.  Takes the post_id
-    of the post on which to view comments. 
+    of the post on which to view comments.
     """
 
     feed = self.client.get_post_comments(self.blog_id, post_id)
@@ -186,7 +187,7 @@ class BloggerExample:
     """
 
     self.client.delete(post_entry)
-  
+
   def run(self):
     """Runs each of the example methods defined above, demonstrating how to
     interface with the Blogger service.
@@ -194,7 +195,7 @@ class BloggerExample:
 
     # Demonstrate retrieving a list of the user's blogs.
     self.PrintUserBlogTitles()
-  
+
     # Demonstrate how to create a draft post.
     draft_post = self.CreatePost('Snorkling in Aruba',
       '<p>We had <b>so</b> much fun snorkling in Aruba<p>',
@@ -203,13 +204,13 @@ class BloggerExample:
 
     # Delete the draft blog post.
     self.client.delete(draft_post)
-  
+
     # Demonstrate how to publish a public post.
     public_post = self.CreatePost("Back from vacation",
       "<p>I didn't want to leave Aruba, but I ran out of money :(<p>",
       False)
     print("Successfully created public post: \"" + public_post.title.text + "\".\n")
-  
+
     # Demonstrate various feed queries.
     print("Now listing all posts.")
     self.PrintAllPosts()
@@ -220,37 +221,37 @@ class BloggerExample:
     print("Now updating the title of the post we just created:")
     public_post = self.UpdatePostTitle(public_post, "The party's over")
     print("Successfully changed the post's title to \"" + public_post.title.text + "\".\n")
-  
+
     # Demonstrate how to retrieve the comments for a post.
 
     # Get the post ID and build the comments feed URI for the specified post
     post_id = public_post.get_post_id()
-    
+
     print("Now posting a comment on the post titled: \"" + public_post.title.text + "\".")
     comment = self.CreateComment(post_id, "Did you see any sharks?")
     print("Successfully posted \"" + comment.content.text + "\" on the post titled: \"" + public_post.title.text + "\".\n")
-    
+
     comment_id = comment.GetCommentId()
-    
+
     print("Now printing all comments")
     self.PrintAllComments(post_id)
-   
+
     # Delete the comment we just posted
     print("Now deleting the comment we just posted")
     self.DeleteComment(comment)
-    print("Successfully deleted comment.") 
+    print("Successfully deleted comment.")
     self.PrintAllComments(post_id)
 
     # Demonstrate deleting posts.
     print("Now deleting the post titled: \"" + public_post.title.text + "\".")
     self.DeletePost(public_post)
-    print("Successfully deleted post.") 
+    print("Successfully deleted post.")
     self.PrintAllPosts()
 
 
 def main():
   """The main function runs the BloggerExample application.
-  
+
   NOTE:  It is recommended that you run this sample using a test account.
   """
   sample = BloggerExample()

@@ -18,6 +18,7 @@
 __author__ = ('api.jfisher (Jeff Fisher), '
               'e.bidelman (Eric Bidelman)')
 
+from __future__ import print_function
 
 import sys
 import re

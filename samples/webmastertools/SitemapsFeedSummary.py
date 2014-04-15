@@ -15,6 +15,7 @@
 # limitations under the License.
 
 
+from __future__ import print_function
 import gdata.webmastertools.service
 import gdata.service
 try:
@@ -34,7 +35,7 @@ password = getpass.getpass()
 site_uri = input('Please enter your site url: ')
 
 client = gdata.webmastertools.service.GWebmasterToolsService(
-    email=username, 
+    email=username,
     password=password, source='PythonWebmasterToolsSample-1')
 
 print('Logging in')

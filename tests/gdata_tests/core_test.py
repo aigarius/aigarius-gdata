@@ -19,11 +19,12 @@
 
 
 __author__ = 'j.s@google.com (Jeff Scudder)'
+from __future__ import print_function
 
 
 import unittest
 import gdata.core
-import gdata.test_config as conf 
+import gdata.test_config as conf
 
 
 
@@ -58,8 +59,8 @@ VIDEO_EXAMPLE = (
 
 
 class JsoncConversionTest(unittest.TestCase):
-  
-  # See http://code.google.com/apis/youtube/2.0/developers_guide_jsonc.html 
+
+  # See http://code.google.com/apis/youtube/2.0/developers_guide_jsonc.html
   def test_from_and_to_old_json(self):
     json = ('{"media$group":{"media$credit":[{"$t":"GoogleDevelopers", '
             '"role":"uploader", "scheme":"urn:youtube"}]}}')
@@ -92,7 +93,7 @@ class JsoncConversionTest(unittest.TestCase):
     x = gdata.core.Jsonc(x=1, y=2, z=3)
     pretty = gdata.core.prettify_jsonc(x)
     self.assert_(isinstance(pretty, str))
-    
+
     pretty = gdata.core.prettify_jsonc(x, 4)
     self.assert_(isinstance(pretty, str))
 

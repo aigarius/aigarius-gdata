@@ -17,6 +17,7 @@
 
 __author__ = 'e.bidelman (Eric Bidelman)'
 
+from __future__ import print_function
 import getopt
 import mimetypes
 import os.path

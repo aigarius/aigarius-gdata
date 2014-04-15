@@ -22,6 +22,7 @@
 
 __author__ = 'jlee@pbu.edu'
 
+from __future__ import print_function
 import getopt
 import getpass
 import sys

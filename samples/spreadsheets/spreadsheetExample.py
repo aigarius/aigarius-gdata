@@ -18,6 +18,7 @@
 __author__ = 'api.laurabeth@gmail.com (Laura Beth Lincoln)'
 
 
+from __future__ import print_function
 try:
   from xml.etree import ElementTree
 except ImportError:
@@ -43,7 +44,7 @@ class SimpleCRUD:
     self.curr_key = ''
     self.curr_wksht_id = ''
     self.list_feed = None
-    
+
   def _PromptForSpreadsheet(self):
     # Get the list of spreadsheets
     feed = self.gd_client.GetSpreadsheetsFeed()
@@ -51,7 +52,7 @@ class SimpleCRUD:
     input = input('\nSelection: ')
     id_parts = feed.entry[string.atoi(input)].id.text.split('/')
     self.curr_key = id_parts[len(id_parts) - 1]
-  
+
   def _PromptForWorksheet(self):
     # Get the list of worksheets
     feed = self.gd_client.GetWorksheetsFeed(self.curr_key)
@@ -59,7 +60,7 @@ class SimpleCRUD:
     input = input('\nSelection: ')
     id_parts = feed.entry[string.atoi(input)].id.text.split('/')
     self.curr_wksht_id = id_parts[len(id_parts) - 1]
-  
+
   def _PromptForCellsAction(self):
     print ('dump\n'
            'update {row} {col} {input_value}\n'
@@ -76,7 +77,7 @@ class SimpleCRUD:
         self._CellsUpdateAction(parsed[0], parsed[1], '')
     else:
       self._InvalidCommandError(input)
-  
+
   def _PromptForListAction(self):
     print ('dump\n'
            'insert {row_data} (example: insert label=content)\n'
@@ -97,49 +98,49 @@ class SimpleCRUD:
       self._ListDeleteAction(command[1])
     else:
       self._InvalidCommandError(input)
-  
+
   def _CellsGetAction(self):
     # Get the feed of cells
     feed = self.gd_client.GetCellsFeed(self.curr_key, self.curr_wksht_id)
     self._PrintFeed(feed)
-    
+
   def _CellsUpdateAction(self, row, col, inputValue):
-    entry = self.gd_client.UpdateCell(row=row, col=col, inputValue=inputValue, 
+    entry = self.gd_client.UpdateCell(row=row, col=col, inputValue=inputValue,
         key=self.curr_key, wksht_id=self.curr_wksht_id)
     if isinstance(entry, gdata.spreadsheet.SpreadsheetsCell):
       print('Updated!')
-        
+
   def _ListGetAction(self):
     # Get the list feed
     self.list_feed = self.gd_client.GetListFeed(self.curr_key, self.curr_wksht_id)
     self._PrintFeed(self.list_feed)
-    
+
   def _ListInsertAction(self, row_data):
-    entry = self.gd_client.InsertRow(self._StringToDictionary(row_data), 
+    entry = self.gd_client.InsertRow(self._StringToDictionary(row_data),
         self.curr_key, self.curr_wksht_id)
     if isinstance(entry, gdata.spreadsheet.SpreadsheetsList):
       print('Inserted!')
-        
+
   def _ListUpdateAction(self, index, row_data):
     self.list_feed = self.gd_client.GetListFeed(self.curr_key, self.curr_wksht_id)
     entry = self.gd_client.UpdateRow(
-        self.list_feed.entry[string.atoi(index)], 
+        self.list_feed.entry[string.atoi(index)],
         self._StringToDictionary(row_data))
     if isinstance(entry, gdata.spreadsheet.SpreadsheetsList):
       print('Updated!')
-  
+
   def _ListDeleteAction(self, index):
     self.list_feed = self.gd_client.GetListFeed(self.curr_key, self.curr_wksht_id)
     self.gd_client.DeleteRow(self.list_feed.entry[string.atoi(index)])
     print('Deleted!')
-    
+
   def _StringToDictionary(self, row_data):
     dict = {}
     for param in row_data.split():
       temp = param.split('=')
       dict[temp[0]] = temp[1]
     return dict
-  
+
   def _PrintFeed(self, feed):
     for i, entry in enumerate(feed.entry):
       if isinstance(feed, gdata.spreadsheet.SpreadsheetsCellsFeed):
@@ -149,15 +150,15 @@ class SimpleCRUD:
         # Print this row's value for each column (the custom dictionary is
         # built using the gsx: elements in the entry.)
         print('Contents:')
-        for key in entry.custom:  
-          print('  %s: %s' % (key, entry.custom[key].text)) 
+        for key in entry.custom:
+          print('  %s: %s' % (key, entry.custom[key].text))
         print('\n', end=' ')
       else:
         print('%s %s\n' % (i, entry.title.text))
-        
+
   def _InvalidCommandError(self, input):
     print('Invalid input: %s\n' % (input))
-    
+
   def Run(self):
     self._PromptForSpreadsheet()
     self._PromptForWorksheet()
@@ -177,7 +178,7 @@ def main():
   except getopt.error as msg:
     print('python spreadsheetExample.py --user [username] --pw [password] ')
     sys.exit(2)
-  
+
   user = ''
   pw = ''
   key = ''
@@ -191,7 +192,7 @@ def main():
   if user == '' or pw == '':
     print('python spreadsheetExample.py --user [username] --pw [password] ')
     sys.exit(2)
-        
+
   sample = SimpleCRUD(user, pw)
   sample.Run()
 

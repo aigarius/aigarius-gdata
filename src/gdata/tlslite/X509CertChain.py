@@ -1,5 +1,6 @@
 """Class representing an X.509 certificate chain."""
 
+from __future__ import print_function
 from .utils import cryptomath
 
 class X509CertChain:

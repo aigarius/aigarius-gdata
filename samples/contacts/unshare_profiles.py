@@ -19,6 +19,7 @@
 __author__ = 'alainv@google.com (Alain Vongsouvanh)'
 
 
+from __future__ import print_function
 import sys
 
 import gdata.contacts.client

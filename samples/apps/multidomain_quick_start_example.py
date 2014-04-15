@@ -16,6 +16,7 @@
 
 __author__ = 'Gunjan Sharma <gunjansharma@google.com>'
 
+from __future__ import print_function
 import getopt
 import getpass
 import sys

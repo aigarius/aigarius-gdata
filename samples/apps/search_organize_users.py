@@ -25,6 +25,7 @@ Usage:
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 from optparse import OptionParser
 import re
 from gdata.apps.client import AppsClient
@@ -42,7 +43,7 @@ class SearchAndOrganizeUsers(object):
 
   def __init__(self, client_id, client_secret, domain):
     """Create a new SearchAndOrganizeUsers object configured for a domain.
-    
+
     Args:
       client_id: [string] The clientId of the developer.
       client_secret: [string] The clientSecret of the developer.

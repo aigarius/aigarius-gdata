@@ -28,6 +28,7 @@ Usage:
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 import os
 import pprint
 import sys

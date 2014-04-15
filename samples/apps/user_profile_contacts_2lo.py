@@ -22,6 +22,7 @@ and Contacts API and retrieves user's profile and contacts.
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 from optparse import OptionParser
 import gdata.apps.client
 import gdata.contacts.client

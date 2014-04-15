@@ -19,6 +19,7 @@
 
 __author__ = 'google-apps-apis@googlegroups.com'
 
+from __future__ import print_function
 
 import unittest
 try:
@@ -51,7 +52,7 @@ class GroupsTest(unittest.TestCase):
     self.groups_client = gdata.apps.groups.service.GroupsService(
         email=admin_email, domain=domain, password=admin_password,
         source='GroupsClient "Unit" Tests')
-    self.groups_client.ProgrammaticLogin()  
+    self.groups_client.ProgrammaticLogin()
     self.created_users = []
     self.created_groups = []
     self.createUsers();
@@ -120,7 +121,7 @@ class GroupsTest(unittest.TestCase):
     self.assertEquals(created_group02['groupId'], group02_id)
     self.created_groups.append(group01_id)
     self.created_groups.append(group02_id)
-   
+
     # tests UpdateGroup method
     try:
       updated_group = self.groups_client.UpdateGroup(group01_id, 'Updated!',
@@ -137,7 +138,7 @@ class GroupsTest(unittest.TestCase):
       self.fail('Unexpected exception occurred: %s' % e)
 
     self.assertEquals(retrieved_group['groupId'], group01_id + '@' + domain)
-   
+
     # tests RetrieveAllGroups method
     try:
       retrieved_groups = self.groups_client.RetrieveAllGroups()
@@ -146,7 +147,7 @@ class GroupsTest(unittest.TestCase):
 
     self.assertEquals(len(retrieved_groups),
                       len(self.apps_client.RetrieveAllEmailLists().entry))
-   
+
     # tests AddMemberToGroup
     try:
       added_member = self.groups_client.AddMemberToGroup(
@@ -157,10 +158,10 @@ class GroupsTest(unittest.TestCase):
           group01_id, group02_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(added_member['memberId'],
                       self.user_yuji.login.user_name)
-   
+
     # tests RetrieveGroups method
     try:
       retrieved_direct_groups = self.groups_client.RetrieveGroups(
@@ -180,27 +181,27 @@ class GroupsTest(unittest.TestCase):
           self.user_yuji.login.user_name, group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(result, True)
-   
+
     # tests RetrieveMember method
     try:
       retrieved_member = self.groups_client.RetrieveMember(
           self.user_yuji.login.user_name, group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(retrieved_member['memberId'],
                       self.user_yuji.login.user_name + '@' + domain)
-   
+
     # tests RetrieveAllMembers method
     try:
       retrieved_members = self.groups_client.RetrieveAllMembers(group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(len(retrieved_members), 1)
-   
+
     # tests RemoveMemberFromGroup method
     try:
       self.groups_client.RemoveMemberFromGroup(self.user_yuji.login.user_name,
@@ -208,16 +209,16 @@ class GroupsTest(unittest.TestCase):
       retrieved_members = self.groups_client.RetrieveAllMembers(group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(len(retrieved_members), 0)
-   
+
     # tests AddOwnerToGroup
     try:
       added_owner = self.groups_client.AddOwnerToGroup(
           self.user_yuji.login.user_name, group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(added_owner['email'],
                       self.user_yuji.login.user_name)
 
@@ -227,27 +228,27 @@ class GroupsTest(unittest.TestCase):
           self.user_yuji.login.user_name, group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(result, True)
-   
+
     # tests RetrieveOwner method
     try:
       retrieved_owner = self.groups_client.RetrieveOwner(
           self.user_yuji.login.user_name, group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(retrieved_owner['email'],
                       self.user_yuji.login.user_name + '@' + domain)
-   
+
     # tests RetrieveAllOwners method
     try:
       retrieved_owners = self.groups_client.RetrieveAllOwners(group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(len(retrieved_owners), 1)
-   
+
     # tests RemoveOwnerFromGroup method
     try:
       self.groups_client.RemoveOwnerFromGroup(self.user_yuji.login.user_name,
@@ -255,7 +256,7 @@ class GroupsTest(unittest.TestCase):
       retrieved_owners = self.groups_client.RetrieveAllOwners(group01_id)
     except Exception as e:
       self.fail('Unexpected exception occurred: %s' % e)
-     
+
     self.assertEquals(len(retrieved_owners), 0)
 
 

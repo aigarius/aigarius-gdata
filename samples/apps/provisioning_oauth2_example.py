@@ -18,6 +18,7 @@
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 from optparse import OptionParser
 import gdata.apps
 import gdata.apps.emailsettings.client
@@ -62,7 +63,7 @@ class OAuth2ClientSample(object):
     self.baseuri = '%s/%s' % (BASE_URL, domain)
     self.client = gdata.apps.groups.client.GroupsProvisioningClient(
         domain=self.domain, auth_token=self.token)
-    # Authorize the client. 
+    # Authorize the client.
     # This will add the Authorization header to all future requests.
     self.token.authorize(self.client)
     self.email_client = gdata.apps.emailsettings.client.EmailSettingsClient(

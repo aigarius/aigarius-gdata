@@ -23,6 +23,7 @@ the members of groups that are the member of given group and lists them.
 
 __author__ = 'Shraddha Gupta <shraddhag@google.com>'
 
+from __future__ import print_function
 from optparse import OptionParser
 import gdata.apps.groups.client
 
